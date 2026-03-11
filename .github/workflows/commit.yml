@@ -10,7 +10,17 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v3
+      - name: Checkout repo
+        uses: actions/checkout@v3
 
       - name: Make change
-        run: date >> log.txt
+        run: |
+          echo "$(date)" >> log.txt
+
+      - name: Commit and push
+        run: |
+          git config --global user.name "Devansh-04"
+          git config --global user.email "devansh@example.com"
+          git add .
+          git commit -m "Daily commit" || exit 0
+          git push
